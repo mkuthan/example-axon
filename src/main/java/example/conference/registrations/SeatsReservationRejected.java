@@ -4,12 +4,19 @@ public class SeatsReservationRejected {
 
     private String orderId;
 
-    public SeatsReservationRejected(String orderId) {
+    private String rejectionReason;
+
+    public SeatsReservationRejected(String orderId, String rejectionReason) {
         this.orderId = orderId;
+        this.rejectionReason = rejectionReason;
     }
 
     public String getOrderId() {
         return orderId;
+    }
+
+    public String getRejectionReason() {
+        return rejectionReason;
     }
 
     @Override
@@ -20,19 +27,23 @@ public class SeatsReservationRejected {
         SeatsReservationRejected that = (SeatsReservationRejected) o;
 
         if (!orderId.equals(that.orderId)) return false;
+        if (!rejectionReason.equals(that.rejectionReason)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return orderId.hashCode();
+        int result = orderId.hashCode();
+        result = 31 * result + rejectionReason.hashCode();
+        return result;
     }
 
     @Override
     public String toString() {
-        return "SeatsReservationAccepted{" +
+        return "SeatsReservationRejected{" +
                 "orderId='" + orderId + '\'' +
+                ", rejectionReason='" + rejectionReason + '\'' +
                 '}';
     }
 

@@ -1,22 +1,22 @@
 package example.conference.payments;
 
-import example.conference.registration.PlaceOrder;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
-@RequestMapping("/registration")
+@RequestMapping("/payments")
 @RestController
 public class PaymentController {
 
-	@Autowired
-	private CommandGateway commandGateway;
+    @Autowired
+    private CommandGateway commandGateway;
 
-	@RequestMapping(value = "/placeOrder", method = RequestMethod.POST)
-	@ResponseStatus(HttpStatus.OK)
-	public void placeOrder(@RequestBody PlaceOrder command) {
-		commandGateway.send(command);
-	}
+    @RequestMapping(value = "/makePayment", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void placeOrder(@RequestBody MakePayment command, UriComponentsBuilder builder) {
+        commandGateway.send(command);
+    }
 
 }

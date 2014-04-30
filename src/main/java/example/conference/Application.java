@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 @Configuration
-@ImportResource("classpath:/axon.xml")
+@ImportResource({"classpath:/axon.xml", "classpath:/aop.xml"})
 @EnableAutoConfiguration
 @ComponentScan
 public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
 }

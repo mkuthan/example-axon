@@ -2,23 +2,28 @@ package example.conference.registrations;
 
 public class MakeSeatsReservation {
 
-    private String reservationId;
-    private String orderId;
     private String conferenceId;
+    private String orderId;
     private int numberOfSeats;
 
-    public MakeSeatsReservation(String reservationId, String orderId) {
-        this.reservationId = reservationId;
+    public MakeSeatsReservation(String conferenceId, String orderId, int numberOfSeats) {
+        this.conferenceId = conferenceId;
         this.orderId = orderId;
+        this.numberOfSeats = numberOfSeats;
+    }
+
+    public String getConferenceId() {
+        return conferenceId;
     }
 
     public String getOrderId() {
         return orderId;
     }
 
-    public String getReservationId() {
-        return reservationId;
+    public int getNumberOfSeats() {
+        return numberOfSeats;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -27,25 +32,27 @@ public class MakeSeatsReservation {
 
         MakeSeatsReservation that = (MakeSeatsReservation) o;
 
-        if (orderId != null ? !orderId.equals(that.orderId) : that.orderId != null) return false;
-        if (reservationId != null ? !reservationId.equals(that.reservationId) : that.reservationId != null)
-            return false;
+        if (numberOfSeats != that.numberOfSeats) return false;
+        if (!conferenceId.equals(that.conferenceId)) return false;
+        if (!orderId.equals(that.orderId)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = orderId != null ? orderId.hashCode() : 0;
-        result = 31 * result + (reservationId != null ? reservationId.hashCode() : 0);
+        int result = conferenceId.hashCode();
+        result = 31 * result + orderId.hashCode();
+        result = 31 * result + numberOfSeats;
         return result;
     }
 
     @Override
     public String toString() {
-        return "MakeSeatReservation{" +
-                "orderId='" + orderId + '\'' +
-                ", reservationId='" + reservationId + '\'' +
+        return "MakeSeatsReservation{" +
+                "conferenceId='" + conferenceId + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", numberOfSeats=" + numberOfSeats +
                 '}';
     }
 

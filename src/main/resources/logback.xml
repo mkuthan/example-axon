@@ -2,6 +2,8 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml" />
 
-	<logger name="org.axonframework" level="DEBUG" />
-	
+    <logger name="example.conference" level="TRACE" />
+
+    <logger name="org.axonframework" level="INFO" />
+	<logger name="org.springframework" level="INFO" />
 </configuration>

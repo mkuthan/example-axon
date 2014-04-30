@@ -17,11 +17,11 @@ public class Payment extends AbstractAnnotatedAggregateRoot<String> {
         requireNonNull(paymentId);
         requireNonNull(orderId);
 
-        apply(new PaymentAccepted(paymentId, orderId));
+        apply(new PaymentReceived(paymentId, orderId));
     }
 
     @EventSourcingHandler
-    private void handle(PaymentAccepted event) {
+    private void handle(PaymentReceived event) {
         this.paymentId = event.getPaymentId();
         this.orderId = event.getOrderId();
     }

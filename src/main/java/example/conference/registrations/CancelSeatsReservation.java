@@ -49,7 +49,7 @@ public class CancelSeatsReservation {
 
     @Override
     public String toString() {
-        return "MakeSeatsReservation{" +
+        return "CancelSeatsReservation{" +
                 "conferenceId='" + conferenceId + '\'' +
                 ", orderId='" + orderId + '\'' +
                 ", numberOfSeats=" + numberOfSeats +

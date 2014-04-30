@@ -41,7 +41,7 @@ public class CreateSeatsAvailability {
 
     @Override
     public String toString() {
-        return "SeatsAvailabilityCreated{" +
+        return "CreateSeatsAvailability{" +
                 "conferenceId='" + conferenceId + '\'' +
                 ", availableNumberOfSeats=" + availableNumberOfSeats +
                 '}';

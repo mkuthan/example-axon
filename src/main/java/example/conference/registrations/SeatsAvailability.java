@@ -11,19 +11,55 @@ public class SeatsAvailability extends AbstractAnnotatedAggregateRoot<String> {
     @AggregateIdentifier
     private String conferenceId;
 
-    private String orderId;
+    private int availableNumberOfSeats;
 
-    public SeatsAvailability(String reservationId, String orderId) {
-        requireNonNull(reservationId);
+    public SeatsAvailability(String conferenceId, int availableNumberOfSeats) {
+        requireNonNull(conferenceId);
+        checkNumberOfSeats(availableNumberOfSeats);
+
+        apply(new SeatsAvailabilityCreated(conferenceId, availableNumberOfSeats));
+    }
+
+    public void makeSeatsReservation(String orderId, int numberOfSeats) {
         requireNonNull(orderId);
+        checkNumberOfSeats(numberOfSeats);
 
-        apply(new SeatsReserved(reservationId, orderId));
+        if (numberOfSeats > availableNumberOfSeats) {
+            apply(new SeatsReservationAccepted(orderId, numberOfSeats));
+        } else {
+            String rejectionReason = "Insufficient number of seats: '" + availableNumberOfSeats + "' but requested: '" + numberOfSeats + "'";
+            apply(new SeatsReservationRejected(orderId, rejectionReason));
+        }
+    }
+
+
+    public void cancelSeatsReservation(String orderId, int numberOfSeats) {
+        requireNonNull(orderId);
+        checkNumberOfSeats(numberOfSeats);
+
+        apply(new SeatsReservationCancelled(orderId, numberOfSeats));
     }
 
     @EventSourcingHandler
-    private void handle(SeatsReserved event) {
-        this.reservationId = event.getReservationId();
-        this.orderId = event.getOrderId();
+    private void handle(SeatsAvailabilityCreated event) {
+        this.conferenceId = event.getConferenceId();
+        this.availableNumberOfSeats = event.getAvailableNumberOfSeats();
+    }
+
+    @EventSourcingHandler
+    private void handle(SeatsReservationAccepted event) {
+        this.availableNumberOfSeats -= event.getNumberOfSeats();
+    }
+
+    @EventSourcingHandler
+    private void handle(SeatsReservationCancelled event) {
+        this.availableNumberOfSeats += event.getNumberOfSeats();
+    }
+
+    private void checkNumberOfSeats(int numberOfSeats) {
+        if (numberOfSeats <= 0) {
+            throw new IllegalArgumentException("Number of seats must be grater than 0, but was: '" + numberOfSeats + "'");
+        }
     }
 
     // constructor required by framework

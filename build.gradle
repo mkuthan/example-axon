@@ -1,34 +1,38 @@
-buildscript {
-	repositories {
-		maven { url "http://repo.spring.io/libs-snapshot" }
-		mavenLocal()
-	}
-	dependencies { classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.0.RELEASE") }
-}
-
 apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
-	baseName = 'example-axon'
-	version =  '1.0.0'
+    baseName = 'example-axon'
+    version = '1.0.0'
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "http://repo.spring.io/libs-snapshot"
+        }
+        mavenLocal()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.0.RELEASE")
+    }
 }
 
 repositories {
-	mavenCentral()
-	maven { url "http://repo.spring.io/libs-snapshot" }
+    mavenCentral()
 }
 
 dependencies {
-	//compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-		
-	compile('org.axonframework:axon-core:2.1.1')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    compile('org.springframework:spring-tx')
+
+    compile('org.aspectj:aspectjweaver')
+
+    compile('org.axonframework:axon-core:2.1.1')
 }
 
-task wrapper(type: Wrapper) { 
-	gradleVersion = '1.11' 
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
 }

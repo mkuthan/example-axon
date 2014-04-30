@@ -1,16 +1,6 @@
-build
 .gradle
-*.class
+.idea
+build
 
-# Eclipse #
-.classpath
-.project
-.springBeans
-.settings/*
-
-# IDEA #
-*.ipr
 *.iml
-*.iws
-.idea/libraries
-/bin
+
