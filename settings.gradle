@@ -1,0 +1,2 @@
+include 'application','management-api', 'management-domain', 'payments-api', 'payments-domain', 'registrations-api', 'registrations-domain'
+

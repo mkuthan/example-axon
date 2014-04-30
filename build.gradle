@@ -1,16 +1,6 @@
-apply plugin: 'java'
-apply plugin: 'spring-boot'
-
-jar {
-    baseName = 'example-axon'
-    version = '1.0.0'
-}
-
 buildscript {
     repositories {
-        maven {
-            url "http://repo.spring.io/libs-snapshot"
-        }
+        maven { url "http://repo.spring.io/libs-snapshot" }
         mavenLocal()
     }
     dependencies {
@@ -18,19 +8,74 @@ buildscript {
     }
 }
 
-repositories {
-    mavenCentral()
+ext {
+    springVersion = '4.0.3.RELEASE'
 }
 
-dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+allprojects {
+    group = 'example-axon'
+    version = '1.0'
 
-    compile('org.springframework:spring-tx')
+    apply plugin: 'java'
 
-    compile('org.aspectj:aspectjweaver')
+    repositories {
+        mavenCentral()
+        maven { url "http://repo.spring.io/libs-snapshot" }
+    }
+}
 
-    compile('org.axonframework:axon-core:2.1.1')
+configure(subprojects.findAll { it.name =~ '-api' }) {
+    apply plugin: 'groovy'
+
+    dependencies {
+        compile('org.codehaus.groovy:groovy-all:2.2.2')
+    }
+}
+
+configure(subprojects.findAll { it.name =~ '-domain' }) {
+    dependencies {
+        compile("org.springframework:spring-aop:${springVersion}")
+        compile("org.springframework:spring-tx:${springVersion}")
+        compile("org.springframework:spring-webmvc:${springVersion}")
+
+        compile('org.aspectj:aspectjweaver:1.7.4')
+
+        compile('org.axonframework:axon-core:2.1.1')
+    }
+}
+
+project(':management-domain') {
+    dependencies {
+        compile project(':management-api')
+    }
+}
+
+project(':payments-domain') {
+    dependencies {
+        compile project(':payments-api')
+    }
+}
+
+project(':registrations-domain') {
+    dependencies {
+        compile project(':management-api')
+        compile project(':payments-api')
+        compile project(':registrations-api')
+    }
+}
+
+project(':application') {
+    apply plugin: 'spring-boot'
+
+    dependencies {
+        compile project(':management-domain')
+        compile project(':payments-domain')
+        compile project(':registrations-domain')
+
+        // Spring Boot
+        compile('org.springframework.boot:spring-boot-starter-web')
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
 }
 
 task wrapper(type: Wrapper) {
