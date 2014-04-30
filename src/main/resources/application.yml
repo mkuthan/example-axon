@@ -1,0 +1,4 @@
+application:
+  axon: 
+    eventStore:
+      baseDir: "${java.io.tmpdir}/example-axon"
