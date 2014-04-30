@@ -105,6 +105,9 @@ public class ApplicationTest {
 
     private void deleteFileRecursively() throws IOException {
         Path directory = Paths.get(axonFileStoreDirectory);
+        if (!directory.toFile().exists()) {
+            return;
+        }
         Files.walkFileTree(directory, new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
