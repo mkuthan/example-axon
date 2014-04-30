@@ -1,14 +1,7 @@
-buildscript {
-    repositories {
-        maven { url "http://repo.spring.io/libs-snapshot" }
-        mavenLocal()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.0.RELEASE")
-    }
-}
-
 ext {
+    aspectjVersion = '1.7.4'
+    axonVersion = '2.1.1'
+    groovyVersion = '2.2.2'
     springVersion = '4.0.3.RELEASE'
 }
 
@@ -20,7 +13,6 @@ allprojects {
 
     repositories {
         mavenCentral()
-        maven { url "http://repo.spring.io/libs-snapshot" }
     }
 }
 
@@ -28,19 +20,17 @@ configure(subprojects.findAll { it.name =~ '-api' }) {
     apply plugin: 'groovy'
 
     dependencies {
-        compile('org.codehaus.groovy:groovy-all:2.2.2')
+        compile("org.codehaus.groovy:groovy-all:${groovyVersion}")
     }
 }
 
 configure(subprojects.findAll { it.name =~ '-domain' }) {
     dependencies {
-        compile("org.springframework:spring-aop:${springVersion}")
-        compile("org.springframework:spring-tx:${springVersion}")
         compile("org.springframework:spring-webmvc:${springVersion}")
 
-        compile('org.aspectj:aspectjweaver:1.7.4')
+        compile("org.aspectj:aspectjweaver:${aspectjVersion}")
 
-        compile('org.axonframework:axon-core:2.1.1')
+        compile("org.axonframework:axon-core:${axonVersion}")
     }
 }
 
@@ -72,9 +62,21 @@ project(':application') {
         compile project(':payments-domain')
         compile project(':registrations-domain')
 
-        // Spring Boot
         compile('org.springframework.boot:spring-boot-starter-web')
         testCompile('org.springframework.boot:spring-boot-starter-test')
+
+        compile("org.springframework:spring-aop:${springVersion}")
+        compile("org.springframework:spring-tx:${springVersion}")
+    }
+}
+
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-snapshot" }
+        mavenLocal()
+    }
+    dependencies {
+        classpath('org.springframework.boot:spring-boot-gradle-plugin:1.0.2.RELEASE')
     }
 }
 
