@@ -1,2 +1,6 @@
-include 'application','management-api', 'management-impl', 'payments-api', 'payments-impl', 'registrations-api', 'registrations-impl'
+include 'conference-client',
+        'conference-configuration',
+        'management-api', 'management-impl',
+        'payments-api', 'payments-impl',
+        'registrations-api', 'registrations-impl'
 
