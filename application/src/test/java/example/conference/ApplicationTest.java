@@ -62,7 +62,7 @@ public class ApplicationTest {
     public void end2End() throws Exception {
         // simulate conference.management BC
         publishEvent(new ConferenceCreated(QCON_2014_NY, 1200));
-        publishEvent(new ConferenceCreated(DEVOXX_2014_BE, 3800));
+        //publishEvent(new ConferenceCreated(DEVOXX_2014_BE, 3800));
 
         // register to QCon
         String qConOrderIdentifier = generateIdentifier();

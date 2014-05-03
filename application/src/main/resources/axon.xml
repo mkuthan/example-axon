@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:axon="http://www.axonframework.org/schema/core"
+       xmlns:axon="http://www.axonframework.org/schema/core" xmlns:axon-amqp="http://www.axonframework.org/schema/amqp"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-	http://www.axonframework.org/schema/core http://www.axonframework.org/schema/axon-core.xsd">
+	http://www.axonframework.org/schema/core http://www.axonframework.org/schema/axon-core.xsd http://www.axonframework.org/schema/amqp http://www.axonframework.org/schema/axon-amqp.xsd">
 
     <axon:annotation-config/>
 
-    <axon:event-bus id="eventBus"/>
+    <bean id="serializer" class="org.axonframework.serializer.xml.XStreamSerializer"/>
+
+    <axon-amqp:terminal id="terminal" exchange-name="Axon.EventBus">
+        <axon-amqp:default-configuration/>
+    </axon-amqp:terminal>
+
+    <axon:cluster id="cluster" default="true">
+        <axon:meta-data>
+            <entry key="AMQP.Config">
+                <axon-amqp:configuration queue-name="ExampleCluster-queue"/>
+            </entry>
+        </axon:meta-data>
+    </axon:cluster>
+
+    <axon:event-bus id="eventBus" terminal="terminal"/>
 
     <axon:command-bus id="commandBus"/>
 
@@ -24,7 +38,7 @@
     <axon:saga-manager
             event-bus="eventBus"
             base-package="example.conference">
-        <axon:async />
+        <axon:async/>
     </axon:saga-manager>
 
     <axon:event-sourcing-repository id="orderRepository"

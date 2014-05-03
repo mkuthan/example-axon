@@ -28,9 +28,8 @@ configure(subprojects.findAll { it.name =~ '-impl' }) {
     dependencies {
         compile("org.springframework:spring-webmvc:${springVersion}")
 
-        compile("org.aspectj:aspectjweaver:${aspectjVersion}")
-
         compile("org.axonframework:axon-core:${axonVersion}")
+        compile("org.axonframework:axon-amqp:${axonVersion}")
     }
 }
 
@@ -63,7 +62,10 @@ project(':application') {
         compile project(':registrations-impl')
 
         compile('org.springframework.boot:spring-boot-starter-web')
+        compile('org.springframework.boot:spring-boot-starter-amqp')
         testCompile('org.springframework.boot:spring-boot-starter-test')
+
+        compile("org.aspectj:aspectjweaver:${aspectjVersion}")
 
         compile("org.springframework:spring-aop:${springVersion}")
         compile("org.springframework:spring-tx:${springVersion}")

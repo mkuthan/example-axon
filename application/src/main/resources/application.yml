@@ -1,4 +1,12 @@
 application:
-  axon: 
+  axon:
     eventStore:
       baseDir: "${java.io.tmpdir}/example-axon"
+
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
