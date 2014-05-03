@@ -23,7 +23,9 @@
 
     <axon:saga-manager
             event-bus="eventBus"
-            base-package="example.conference"/>
+            base-package="example.conference">
+        <axon:async />
+    </axon:saga-manager>
 
     <axon:event-sourcing-repository id="orderRepository"
                                     event-store="eventStore"

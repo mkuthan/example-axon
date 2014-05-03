@@ -27,7 +27,6 @@ public class Payment extends AbstractAnnotatedAggregateRoot<String> {
         this.orderId = event.getOrderId();
     }
 
-    // constructor required by framework
     protected Payment() {
     }
 }

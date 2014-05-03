@@ -87,7 +87,7 @@ public class ApplicationTest {
                 .andExpect(status().isCreated());
 
 
-        Thread.currentThread().sleep(3000);
+        Thread.currentThread().sleep(10000);
     }
 
     private String toJson(Object object) {

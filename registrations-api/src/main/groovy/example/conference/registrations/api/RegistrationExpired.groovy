@@ -4,6 +4,6 @@ import groovy.transform.Canonical
 
 
 @Canonical
-class OrderExpired {
+class RegistrationExpired {
     String orderId
 }
