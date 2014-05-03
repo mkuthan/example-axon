@@ -1,2 +1,2 @@
-include 'application','management-api', 'management-domain', 'payments-api', 'payments-domain', 'registrations-api', 'registrations-domain'
+include 'application','management-api', 'management-impl', 'payments-api', 'payments-impl', 'registrations-api', 'registrations-impl'
 

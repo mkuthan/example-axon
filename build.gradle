@@ -1,6 +1,6 @@
 ext {
     aspectjVersion = '1.7.4'
-    axonVersion = '2.1.1'
+    axonVersion = '2.1.2'
     groovyVersion = '2.2.2'
     springVersion = '4.0.3.RELEASE'
 }
@@ -24,7 +24,7 @@ configure(subprojects.findAll { it.name =~ '-api' }) {
     }
 }
 
-configure(subprojects.findAll { it.name =~ '-domain' }) {
+configure(subprojects.findAll { it.name =~ '-impl' }) {
     dependencies {
         compile("org.springframework:spring-webmvc:${springVersion}")
 
@@ -34,19 +34,19 @@ configure(subprojects.findAll { it.name =~ '-domain' }) {
     }
 }
 
-project(':management-domain') {
+project(':management-impl') {
     dependencies {
         compile project(':management-api')
     }
 }
 
-project(':payments-domain') {
+project(':payments-impl') {
     dependencies {
         compile project(':payments-api')
     }
 }
 
-project(':registrations-domain') {
+project(':registrations-impl') {
     dependencies {
         compile project(':management-api')
         compile project(':payments-api')
@@ -58,9 +58,9 @@ project(':application') {
     apply plugin: 'spring-boot'
 
     dependencies {
-        compile project(':management-domain')
-        compile project(':payments-domain')
-        compile project(':registrations-domain')
+        compile project(':management-impl')
+        compile project(':payments-impl')
+        compile project(':registrations-impl')
 
         compile('org.springframework.boot:spring-boot-starter-web')
         testCompile('org.springframework.boot:spring-boot-starter-test')
