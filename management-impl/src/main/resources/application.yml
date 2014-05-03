@@ -1,0 +1,10 @@
+server:
+  port: 18080
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+  jmx:
+    enabled: false

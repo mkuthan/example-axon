@@ -25,9 +25,9 @@ configure(subprojects.findAll { it.name =~ '-api' }) {
 }
 
 configure(subprojects.findAll { it.name =~ '-impl' }) {
-    dependencies {
-        compile("org.springframework:spring-webmvc:${springVersion}")
+    apply plugin: 'spring-boot'
 
+    dependencies {
         compile("org.axonframework:axon-core:${axonVersion}")
         compile("org.axonframework:axon-amqp:${axonVersion}")
     }
@@ -35,6 +35,10 @@ configure(subprojects.findAll { it.name =~ '-impl' }) {
 
 project(':management-impl') {
     dependencies {
+        compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+        compile("org.springframework.boot:spring-boot-starter-data-rest")
+        compile('org.springframework.boot:spring-boot-starter-web')
+
         compile project(':management-api')
     }
 }
