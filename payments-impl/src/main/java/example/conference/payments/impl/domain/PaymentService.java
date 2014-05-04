@@ -1,4 +1,4 @@
-package example.conference.payments.domain;
+package example.conference.payments.impl.domain;
 
 import example.conference.payments.api.MakePayment;
 import org.axonframework.commandhandling.annotation.CommandHandler;

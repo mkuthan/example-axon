@@ -1,4 +1,4 @@
-package example.conference.registrations.domain;
+package example.conference.registrations.impl.domain;
 
 import example.conference.management.api.ConferenceCreated;
 import example.conference.registrations.api.CancelSeatsReservation;
@@ -10,7 +10,6 @@ import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,11 +19,9 @@ public class RegistrationService {
     private CommandGateway commandGateway;
 
     @Autowired
-    @Qualifier("orderRepository")
     private EventSourcingRepository<Order> orderRepository;
 
     @Autowired
-    @Qualifier("seatsAvailabilityRepository")
     private EventSourcingRepository<SeatsAvailability> seatsAvailabilityRepository;
 
     @CommandHandler

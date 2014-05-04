@@ -12,13 +12,6 @@ public class SeatType {
 
     private String priceCurrency;
 
-    public SeatType(String name, int quantity, BigDecimal priceAmount, String priceCurrency) {
-        this.name = name;
-        this.quantity = quantity;
-        this.priceAmount = priceAmount;
-        this.priceCurrency = priceCurrency;
-    }
-
     public String getName() {
         return name;
     }

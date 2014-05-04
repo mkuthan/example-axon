@@ -4,4 +4,6 @@ build
 classes
 
 *.iml
+*.ipr
+*.iws
 

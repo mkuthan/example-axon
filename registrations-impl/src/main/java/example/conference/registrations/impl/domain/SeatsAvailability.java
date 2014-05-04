@@ -1,4 +1,4 @@
-package example.conference.registrations.domain;
+package example.conference.registrations.impl.domain;
 
 import example.conference.registrations.api.SeatsAvailabilityCreated;
 import example.conference.registrations.api.SeatsReservationAccepted;

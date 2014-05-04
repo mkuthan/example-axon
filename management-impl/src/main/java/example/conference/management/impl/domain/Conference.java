@@ -11,11 +11,6 @@ public class Conference {
 
     private List<SeatType> seatTypes = new ArrayList<>();
 
-    public Conference(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public String getId() {
         return id;
     }
@@ -38,10 +33,6 @@ public class Conference {
 
     public void setSeatTypes(List<SeatType> seatTypes) {
         this.seatTypes = seatTypes;
-    }
-
-    public void addSeatType(SeatType seatType) {
-        seatTypes.add(seatType);
     }
 
     protected Conference() {

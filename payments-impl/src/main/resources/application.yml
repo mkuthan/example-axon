@@ -2,13 +2,12 @@ application:
   configuration:
     axon:
       eventStore:
-        baseDir: "${java.io.tmpdir}/example-axon/registrations"
-  registrations:
+        baseDir: "${java.io.tmpdir}/example-axon/payments"
+  payments:
     key: "value"
 
-
 server:
-  port: 28080
+  port: 38080
 
 spring:
   jmx:

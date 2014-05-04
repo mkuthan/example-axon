@@ -1,4 +1,4 @@
-package example.conference.registrations.domain;
+package example.conference.registrations.impl.domain;
 
 import example.conference.payments.api.PaymentReceived;
 import example.conference.registrations.api.*;
@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class RegistrationSaga extends AbstractAnnotatedSaga {
 
-    private static final Logger logger = LoggerFactory.getLogger(example.conference.registrations.domain.RegistrationSaga.class);
+    private static final Logger logger = LoggerFactory.getLogger(RegistrationSaga.class);
 
     @Autowired
     private transient CommandGateway commandGateway;

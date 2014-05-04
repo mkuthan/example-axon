@@ -1,4 +1,4 @@
-package example.conference.registrations.domain;
+package example.conference.registrations.impl.domain;
 
 import example.conference.registrations.api.OrderPlaced;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;

@@ -1,5 +1,6 @@
 package example.conference.management.impl;
 
+import example.conference.ConferenceConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +10,7 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
 
 @Configuration
 @EnableAutoConfiguration
-@Import(RepositoryRestMvcConfiguration.class)
+@Import({ConferenceConfiguration.class, RepositoryRestMvcConfiguration.class})
 @ComponentScan
 public class ManagementApplication {
 

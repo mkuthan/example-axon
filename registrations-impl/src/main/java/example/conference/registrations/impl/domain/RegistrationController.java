@@ -1,4 +1,4 @@
-package example.conference.registrations.domain;
+package example.conference.registrations.impl.domain;
 
 import example.conference.registrations.api.RegisterToConference;
 import org.axonframework.commandhandling.gateway.CommandGateway;

@@ -1,3 +1,11 @@
+application:
+  configuration:
+    axon:
+      eventStore:
+        baseDir: "${java.io.tmpdir}/example-axon/management"
+  management:
+    key: "value"
+
 server:
   port: 18080
 

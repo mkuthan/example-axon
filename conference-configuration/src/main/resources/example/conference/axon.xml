@@ -33,27 +33,11 @@
     </bean>
 
     <axon:filesystem-event-store id="eventStore"
-                                 base-dir="${application.axon.eventStore.baseDir}"/>
+                                 base-dir="${application.configuration.axon.eventStore.baseDir}"/>
 
     <axon:saga-manager
             event-bus="eventBus"
             base-package="example.conference">
         <axon:async/>
     </axon:saga-manager>
-
-    <axon:event-sourcing-repository id="orderRepository"
-                                    event-store="eventStore"
-                                    event-bus="eventBus"
-                                    aggregate-type="example.conference.registrations.domain.Order"/>
-
-    <axon:event-sourcing-repository id="seatsAvailabilityRepository"
-                                    event-store="eventStore"
-                                    event-bus="eventBus"
-                                    aggregate-type="example.conference.registrations.domain.SeatsAvailability"/>
-
-    <axon:event-sourcing-repository id="paymentRepository"
-                                    event-store="eventStore"
-                                    event-bus="eventBus"
-                                    aggregate-type="example.conference.payments.domain.Payment"/>
-
 </beans>

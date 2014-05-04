@@ -1,9 +1,10 @@
-package example.conference.payments.domain;
+package example.conference.payments.impl.domain;
 
 import example.conference.payments.api.MakePayment;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RequestMapping("/payments")

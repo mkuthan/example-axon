@@ -4,6 +4,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 @Configuration
-@ImportResource({"classpath:/axon.xml", "classpath:/rabbitmq.xml", "classpath:/aop.xml"})
+@ImportResource({
+        "classpath:/example/conference/aop.xml",
+        "classpath:/example/conference/axon.xml",
+        "classpath:/example/conference/rabbitmq.xml"
+        })
 public class ConferenceConfiguration {
 }

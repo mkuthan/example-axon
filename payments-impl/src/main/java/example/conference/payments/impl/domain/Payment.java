@@ -1,4 +1,4 @@
-package example.conference.payments.domain;
+package example.conference.payments.impl.domain;
 
 import example.conference.payments.api.PaymentReceived;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;

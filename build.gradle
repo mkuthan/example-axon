@@ -17,6 +17,26 @@ allprojects {
     }
 }
 
+project(':conference-client') {
+    apply plugin: 'groovy'
+
+    dependencies {
+        compile("org.codehaus.groovy:groovy-all:${groovyVersion}")
+        compile("com.jayway.restassured:rest-assured:2.3.1")
+    }
+}
+
+project(':conference-configuration') {
+    dependencies {
+        compile("org.springframework:spring-context:${springVersion}")
+
+        compile("org.aspectj:aspectjweaver:${aspectjVersion}")
+
+        compile("org.axonframework:axon-core:${axonVersion}")
+        compile("org.axonframework:axon-amqp:${axonVersion}")
+    }
+}
+
 configure(subprojects.findAll { it.name =~ '-api' }) {
     apply plugin: 'groovy'
 
@@ -29,10 +49,10 @@ configure(subprojects.findAll { it.name =~ '-impl' }) {
     apply plugin: 'spring-boot'
 
     dependencies {
-        compile('org.springframework.boot:spring-boot-starter-amqp')
+        compile project(':conference-configuration')
 
-        compile("org.axonframework:axon-core:${axonVersion}")
-        compile("org.axonframework:axon-amqp:${axonVersion}")
+        compile('org.springframework.boot:spring-boot-starter-amqp')
+        compile('org.springframework.boot:spring-boot-starter-web')
     }
 }
 
@@ -42,7 +62,6 @@ project(':management-impl') {
 
         compile("org.springframework.boot:spring-boot-starter-data-mongodb")
         compile("org.springframework.boot:spring-boot-starter-data-rest")
-        compile('org.springframework.boot:spring-boot-starter-web')
     }
 }
 
@@ -58,41 +77,6 @@ project(':registrations-impl') {
         compile project(':payments-api')
         compile project(':registrations-api')
     }
-}
-
-project(':conference-client') {
-    dependencies {
-        compile project(':management-api')
-        compile project(':management-impl')
-        compile project(':payments-api')
-        compile project(':registrations-api')
-
-        compile("com.fasterxml.jackson.core:jackson-databind:2.3.3")
-        compile("com.jayway.restassured:rest-assured:2.3.1")
-    }
-}
-
-project(':conference-configuration') {
-    dependencies {
-        compile("org.aspectj:aspectjweaver:${aspectjVersion}")
-
-        compile("org.axonframework:axon-core:${axonVersion}")
-        compile("org.axonframework:axon-amqp:${axonVersion}")
-    }
-    /*
-    dependencies {
-        compile project(':management-impl')
-        compile project(':payments-impl')
-        compile project(':registrations-impl')
-
-        compile('org.springframework.boot:spring-boot-starter-web')
-        testCompile('org.springframework.boot:spring-boot-starter-test')
-
-
-        compile("org.springframework:spring-aop:${springVersion}")
-        compile("org.springframework:spring-tx:${springVersion}")
-    }
-    */
 }
 
 buildscript {

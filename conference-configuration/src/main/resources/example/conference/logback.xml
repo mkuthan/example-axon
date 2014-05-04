@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <logger name="example.conference" level="TRACE"/>
+
+    <logger name="org.axonframework" level="INFO"/>
+    <logger name="org.springframework" level="INFO"/>
+</included>
