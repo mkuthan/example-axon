@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 public class PaymentService {
 
     @Autowired
-    @Qualifier("paymentRepository")
     private EventSourcingRepository<Payment> paymentRepository;
 
     @CommandHandler

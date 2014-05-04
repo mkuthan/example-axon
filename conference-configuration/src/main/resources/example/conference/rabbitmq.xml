@@ -3,12 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
 
-    <rabbit:queue id="eventBusQueue" name="ExampleCluster-queue"/>
+    <rabbit:queue name="${application.configuration.rabbitmq.queue.name}"/>
 
-    <rabbit:fanout-exchange id="eventBusExchange"
-                            name="Axon.EventBus">
+    <rabbit:fanout-exchange
+            name="${application.configuration.rabbitmq.exchange.name}">
         <rabbit:bindings>
-            <rabbit:binding queue="eventBusQueue"/>
+            <rabbit:binding queue="${application.configuration.rabbitmq.queue.name}"/>
         </rabbit:bindings>
     </rabbit:fanout-exchange>
 

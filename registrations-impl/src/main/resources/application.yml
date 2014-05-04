@@ -3,6 +3,11 @@ application:
     axon:
       eventStore:
         baseDir: "${java.io.tmpdir}/example-axon/registrations"
+    rabbitmq:
+      exchange:
+        name: "Axon.EventBus"
+      queue:
+        name: "RegistrationsQueue"
   registrations:
     key: "value"
 

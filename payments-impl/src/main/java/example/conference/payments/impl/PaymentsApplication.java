@@ -23,7 +23,7 @@ public class PaymentsApplication {
     }
 
     @Bean
-    public EventSourcingRepository<Payment> orderRepository(EventBus eventBus, EventStore eventStore) {
+    public EventSourcingRepository<Payment> paymentRepository(EventBus eventBus, EventStore eventStore) {
         EventSourcingRepository<Payment> repository = new EventSourcingRepository<>(Payment.class, eventStore);
         repository.setEventBus(eventBus);
         return repository;

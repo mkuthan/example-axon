@@ -8,14 +8,14 @@
 
     <bean id="serializer" class="org.axonframework.serializer.xml.XStreamSerializer"/>
 
-    <axon-amqp:terminal id="terminal" exchange-name="Axon.EventBus">
+    <axon-amqp:terminal id="terminal" exchange-name="${application.configuration.rabbitmq.exchange.name}">
         <axon-amqp:default-configuration/>
     </axon-amqp:terminal>
 
     <axon:cluster id="cluster" default="true">
         <axon:meta-data>
             <entry key="AMQP.Config">
-                <axon-amqp:configuration queue-name="ExampleCluster-queue"/>
+                <axon-amqp:configuration queue-name="${application.configuration.rabbitmq.queue.name}"/>
             </entry>
         </axon:meta-data>
     </axon:cluster>
