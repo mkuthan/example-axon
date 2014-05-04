@@ -1,5 +1,4 @@
 ext {
-    aspectjVersion = '1.7.4'
     axonVersion = '2.1.2'
     groovyVersion = '2.2.2'
     springVersion = '4.0.3.RELEASE'
@@ -30,7 +29,7 @@ project(':conference-configuration') {
     dependencies {
         compile("org.springframework:spring-context:${springVersion}")
 
-        compile("org.aspectj:aspectjweaver:${aspectjVersion}")
+        compile("org.aspectj:aspectjweaver:1.7.4")
 
         compile("org.axonframework:axon-core:${axonVersion}")
         compile("org.axonframework:axon-amqp:${axonVersion}")
