@@ -1,6 +1,6 @@
 package example.conference.management.impl;
 
-import example.conference.ConferenceConfiguration;
+import example.conference.configuration.ConferenceConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;

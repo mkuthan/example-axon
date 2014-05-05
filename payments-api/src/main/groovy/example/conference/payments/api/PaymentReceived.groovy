@@ -1,8 +1,6 @@
 package example.conference.payments.api
 
-import groovy.transform.Canonical
-
-@Canonical
+@ValueObject
 class PaymentReceived {
     String orderId
     String paymentId

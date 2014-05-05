@@ -1,6 +1,6 @@
 package example.conference.payments.impl;
 
-import example.conference.ConferenceConfiguration;
+import example.conference.configuration.ConferenceConfiguration;
 import example.conference.payments.impl.domain.Payment;
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventsourcing.EventSourcingRepository;

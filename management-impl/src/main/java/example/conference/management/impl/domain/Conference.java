@@ -9,6 +9,8 @@ public class Conference {
 
     private String name;
 
+    private String location;
+
     private List<SeatType> seatTypes = new ArrayList<>();
 
     public String getId() {
@@ -25,6 +27,14 @@ public class Conference {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public List<SeatType> getSeatTypes() {

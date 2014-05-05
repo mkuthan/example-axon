@@ -9,6 +9,7 @@ import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventsourcing.EventSourcingRepository;
+import org.axonframework.repository.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,13 +17,10 @@ import org.springframework.stereotype.Component;
 public class RegistrationService {
 
     @Autowired
-    private CommandGateway commandGateway;
+    private Repository<Order> orderRepository;
 
     @Autowired
-    private EventSourcingRepository<Order> orderRepository;
-
-    @Autowired
-    private EventSourcingRepository<SeatsAvailability> seatsAvailabilityRepository;
+    private Repository<SeatsAvailability> seatsAvailabilityRepository;
 
     @CommandHandler
     public void registerToConference(RegisterToConference command) {
@@ -46,11 +44,6 @@ public class RegistrationService {
     public void createSeatsAvailability(CreateSeatsAvailability command) {
         SeatsAvailability seatsAvailability = new SeatsAvailability(command.getSeatsAvailabilityId(), command.getConferenceId(), command.getAvailableNumberOfSeats());
         seatsAvailabilityRepository.add(seatsAvailability);
-    }
-
-    @EventHandler
-    public void handle(ConferenceCreated event) {
-        commandGateway.send(new CreateSeatsAvailability(event.getConferenceId(), event.getConferenceId(), event.getAvailableNumberOfSeats()));
     }
 
 }

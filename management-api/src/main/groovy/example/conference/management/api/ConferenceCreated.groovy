@@ -1,8 +1,6 @@
 package example.conference.management.api
 
-import groovy.transform.Canonical
-
-@Canonical
+@ValueObject
 class ConferenceCreated {
     String conferenceId
     int availableNumberOfSeats

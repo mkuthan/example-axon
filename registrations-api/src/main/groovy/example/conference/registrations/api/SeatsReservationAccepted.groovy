@@ -1,9 +1,6 @@
 package example.conference.registrations.api
 
-import groovy.transform.Canonical
-
-
-@Canonical
+@ValueObject
 class SeatsReservationAccepted {
     String orderId
     int numberOfSeats

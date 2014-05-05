@@ -8,9 +8,6 @@ allprojects {
     group = 'example-axon'
     version = '1.0'
 
-    apply plugin: 'java'
-    apply plugin: 'idea'
-
     repositories {
         mavenCentral()
     }
@@ -26,10 +23,10 @@ project(':conference-client') {
 }
 
 project(':conference-configuration') {
+    apply plugin: 'java'
+
     dependencies {
         compile("org.springframework:spring-context:${springVersion}")
-
-        compile("org.aspectj:aspectjweaver:1.7.4")
 
         compile("org.axonframework:axon-core:${axonVersion}")
         compile("org.axonframework:axon-amqp:${axonVersion}")
@@ -45,10 +42,15 @@ configure(subprojects.findAll { it.name =~ '-api' }) {
 }
 
 configure(subprojects.findAll { it.name =~ '-impl' }) {
+    apply plugin: 'java'
     apply plugin: 'spring-boot'
 
     dependencies {
         compile project(':conference-configuration')
+
+        compile project(':management-api')
+        compile project(':payments-api')
+        compile project(':registrations-api')
 
         compile('org.springframework.boot:spring-boot-starter-amqp')
         compile('org.springframework.boot:spring-boot-starter-web')
@@ -57,8 +59,6 @@ configure(subprojects.findAll { it.name =~ '-impl' }) {
 
 project(':management-impl') {
     dependencies {
-        compile project(':management-api')
-
         compile("org.springframework.boot:spring-boot-starter-data-mongodb")
         compile("org.springframework.boot:spring-boot-starter-data-rest")
     }
@@ -66,15 +66,11 @@ project(':management-impl') {
 
 project(':payments-impl') {
     dependencies {
-        compile project(':payments-api')
     }
 }
 
 project(':registrations-impl') {
     dependencies {
-        compile project(':management-api')
-        compile project(':payments-api')
-        compile project(':registrations-api')
     }
 }
 

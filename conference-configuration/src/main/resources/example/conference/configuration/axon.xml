@@ -8,6 +8,12 @@
 
     <bean id="serializer" class="org.axonframework.serializer.xml.XStreamSerializer"/>
 
+    <bean id="auditingInterceptor" class="org.axonframework.auditing.AuditingInterceptor">
+        <property name="auditLogger">
+            <bean class="example.conference.configuration.DefaultAuditLogger"/>
+        </property>
+    </bean>
+
     <axon-amqp:terminal id="terminal" exchange-name="${application.configuration.rabbitmq.exchange.name}">
         <axon-amqp:default-configuration/>
     </axon-amqp:terminal>
@@ -22,7 +28,11 @@
 
     <axon:event-bus id="eventBus" terminal="terminal"/>
 
-    <axon:command-bus id="commandBus"/>
+    <axon:command-bus id="commandBus">
+        <axon:handlerInterceptors>
+            <ref bean="auditingInterceptor"/>
+        </axon:handlerInterceptors>
+    </axon:command-bus>
 
     <bean class="org.axonframework.commandhandling.gateway.CommandGatewayFactoryBean">
         <property name="commandBus" ref="commandBus"/>
@@ -40,4 +50,5 @@
             base-package="example.conference">
         <axon:async/>
     </axon:saga-manager>
+
 </beans>

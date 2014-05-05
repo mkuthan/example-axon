@@ -1,8 +1,6 @@
 package example.conference.registrations.api
 
-import groovy.transform.Canonical
-
-@Canonical
+@ValueObject
 class OrderPlaced {
     String orderId
     String conferenceId
