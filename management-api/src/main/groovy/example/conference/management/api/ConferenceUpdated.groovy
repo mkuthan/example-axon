@@ -3,5 +3,7 @@ package example.conference.management.api
 @ValueObject
 class ConferenceUpdated {
     String conferenceId
-    int availableNumberOfSeats
+    String name
+    String location
+    List<SeatType> seatTypes
 }

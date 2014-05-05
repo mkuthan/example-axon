@@ -1,10 +1,19 @@
 package example.conference.management.impl.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.math.BigDecimal;
 
+@Document
 public class SeatType {
 
-    private String name;
+    @Id
+    private String id;
+
+    private String conferenceId;
+
+    private String type;
 
     private int quantity;
 
@@ -12,12 +21,28 @@ public class SeatType {
 
     private String priceCurrency;
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getConferenceId() {
+        return conferenceId;
+    }
+
+    public void setConferenceId(String conferenceId) {
+        this.conferenceId = conferenceId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getQuantity() {

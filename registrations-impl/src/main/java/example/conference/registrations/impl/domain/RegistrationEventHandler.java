@@ -15,7 +15,7 @@ public class RegistrationEventHandler {
 
     @EventHandler
     public void handle(ConferenceCreated event) {
-        commandGateway.send(new CreateSeatsAvailability(event.getConferenceId(), event.getConferenceId(), event.getAvailableNumberOfSeats()));
+        commandGateway.send(new CreateSeatsAvailability(event.getConferenceId(), event.getConferenceId(), 111));
     }
 
 }

@@ -1,17 +1,20 @@
 package example.conference.management.impl.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Document
 public class Conference {
 
+    @Id
     private String id;
 
     private String name;
 
     private String location;
-
-    private List<SeatType> seatTypes = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -35,14 +38,6 @@ public class Conference {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public List<SeatType> getSeatTypes() {
-        return seatTypes;
-    }
-
-    public void setSeatTypes(List<SeatType> seatTypes) {
-        this.seatTypes = seatTypes;
     }
 
     protected Conference() {

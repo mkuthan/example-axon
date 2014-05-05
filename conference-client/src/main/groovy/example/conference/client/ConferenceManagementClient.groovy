@@ -33,13 +33,13 @@ def getQconConference() {
             seatTypes:
                     [
                             [
-                                    name         : 'Conference',
+                                    type         : 'Conference',
                                     quantity     : 800,
                                     priceAmount   : 1600,
                                     priceCurrency: 'USD'
                             ],
                             [
-                                    name         : 'Tutorials',
+                                    type         : 'Tutorials',
                                     quantity     : 200,
                                     priceAmount   : 300,
                                     priceCurrency: 'USD'
@@ -56,7 +56,7 @@ def getDevoxxConference() {
             seatTypes:
                     [
                             [
-                                    name         : 'Conference',
+                                    type         : 'Conference',
                                     quantity     : 1500,
                                     priceAmount   : 300,
                                     priceCurrency: 'EUR'

@@ -1,36 +1,39 @@
-ext {
-    axonVersion = '2.1.2'
-    groovyVersion = '2.2.2'
-    springVersion = '4.0.3.RELEASE'
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-snapshot" }
+        mavenLocal()
+    }
+    dependencies {
+        classpath('org.springframework.boot:spring-boot-gradle-plugin:1.0.2.RELEASE')
+    }
 }
 
-allprojects {
+configure(allprojects) { project ->
     group = 'example-axon'
     version = '1.0'
+
+    ext {
+        axonVersion = '2.1.2'
+        groovyVersion = '2.2.2'
+        springVersion = '4.0.3.RELEASE'
+    }
 
     repositories {
         mavenCentral()
     }
-}
 
-project(':conference-client') {
-    apply plugin: 'groovy'
+    apply plugin: "java"
 
-    dependencies {
-        compile("org.codehaus.groovy:groovy-all:${groovyVersion}")
-        compile("com.jayway.restassured:rest-assured:2.3.1")
+    compileJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
-}
 
-project(':conference-configuration') {
-    apply plugin: 'java'
-
-    dependencies {
-        compile("org.springframework:spring-context:${springVersion}")
-
-        compile("org.axonframework:axon-core:${axonVersion}")
-        compile("org.axonframework:axon-amqp:${axonVersion}")
+    compileTestJava {
+        sourceCompatibility=1.8
+        targetCompatibility=1.8
     }
+
 }
 
 configure(subprojects.findAll { it.name =~ '-api' }) {
@@ -42,7 +45,6 @@ configure(subprojects.findAll { it.name =~ '-api' }) {
 }
 
 configure(subprojects.findAll { it.name =~ '-impl' }) {
-    apply plugin: 'java'
     apply plugin: 'spring-boot'
 
     dependencies {
@@ -57,6 +59,28 @@ configure(subprojects.findAll { it.name =~ '-impl' }) {
     }
 }
 
+
+project(':conference-client') {
+    apply plugin: 'groovy'
+
+    dependencies {
+        compile("org.codehaus.groovy:groovy-all:${groovyVersion}")
+        compile("com.jayway.restassured:rest-assured:2.3.1") {
+            exclude group: "org.codehaus.groovy", module: 'groovy'
+        }
+    }
+}
+
+project(':conference-configuration') {
+    dependencies {
+        compile("org.springframework:spring-context:${springVersion}")
+
+        compile("org.axonframework:axon-core:${axonVersion}")
+        compile("org.axonframework:axon-amqp:${axonVersion}")
+    }
+}
+
+
 project(':management-impl') {
     dependencies {
         compile("org.springframework.boot:spring-boot-starter-data-mongodb")
@@ -66,21 +90,13 @@ project(':management-impl') {
 
 project(':payments-impl') {
     dependencies {
+        // TODO
     }
 }
 
 project(':registrations-impl') {
     dependencies {
-    }
-}
-
-buildscript {
-    repositories {
-        maven { url "http://repo.spring.io/libs-snapshot" }
-        mavenLocal()
-    }
-    dependencies {
-        classpath('org.springframework.boot:spring-boot-gradle-plugin:1.0.2.RELEASE')
+        // TODO
     }
 }
 
