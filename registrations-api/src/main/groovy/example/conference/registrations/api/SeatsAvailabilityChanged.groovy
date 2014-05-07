@@ -1,6 +1,8 @@
 package example.conference.registrations.api
 
 @ValueObject
-class CreateSeatsAvailability {
+class SeatsAvailabilityChanged {
     String conferenceId
+    String seatTypeId
+    int quantity
 }

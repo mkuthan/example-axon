@@ -7,6 +7,8 @@ import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventsourcing.EventSourcedAggregateRoot;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventstore.EventStore;
+import org.axonframework.repository.LockManager;
+import org.axonframework.repository.NullLockManager;
 import org.axonframework.repository.Repository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -26,17 +28,22 @@ public class RegistrationsApplication {
     }
 
     @Bean
-    public Repository<Order> orderRepository(EventBus eventBus, EventStore eventStore) {
-        return createEventSourcingRepository(Order.class, eventBus, eventStore);
+    public Repository<Order> orderRepository(EventBus eventBus, EventStore eventStore, LockManager lockManager) {
+        return createEventSourcingRepository(Order.class, eventBus, eventStore, lockManager);
     }
 
     @Bean
-    public Repository<SeatsAvailability> seatsAvailabilityRepository(EventBus eventBus, EventStore eventStore) {
-        return createEventSourcingRepository(SeatsAvailability.class, eventBus, eventStore);
+    public Repository<SeatsAvailability> seatsAvailabilityRepository(EventBus eventBus, EventStore eventStore, LockManager lockManager) {
+        return createEventSourcingRepository(SeatsAvailability.class, eventBus, eventStore, lockManager);
     }
 
-    private <T extends EventSourcedAggregateRoot> EventSourcingRepository<T> createEventSourcingRepository(Class<T> aggregateType, EventBus eventBus, EventStore eventStore) {
-        EventSourcingRepository<T> repository = new EventSourcingRepository<T>(aggregateType, eventStore);
+    @Bean
+    public LockManager lockManager() {
+        return new NullLockManager();
+    }
+
+    private <T extends EventSourcedAggregateRoot> EventSourcingRepository<T> createEventSourcingRepository(Class<T> aggregateType, EventBus eventBus, EventStore eventStore, LockManager lockManager) {
+        EventSourcingRepository<T> repository = new EventSourcingRepository<>(aggregateType, eventStore, lockManager);
         repository.setEventBus(eventBus);
         return repository;
     }

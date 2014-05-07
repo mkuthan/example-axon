@@ -1,13 +1,14 @@
 application:
   configuration:
     axon:
-      eventStore:
-        baseDir: "${java.io.tmpdir}/example-axon/management"
-    rabbitmq:
-      exchange:
-        name: "Axon.EventBus"
-      queue:
-        name: "ManagementQueue"
+      eventStoreBaseDir: "${java.io.tmpdir}/example-axon/management"
+    rabbit:
+      host: "localhost"
+      port: 5672
+      username: guest
+      password: guest
+      exchangeName: "Axon.EventBus"
+      queueName: "ManagementQueue"
   management:
     key: "value"
 
@@ -15,9 +16,15 @@ server:
   port: 18080
 
 spring:
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
+  datasource:
+    driverClassName: "org.h2.Driver"
+    url: "jdbc:h2:mem:management;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
+    username: "sa"
+    password: ""
+  jpa:
+    show-sql: false
+    ddl-auto: create
+    hibernate:
+      naming-strategy: "org.hibernate.cfg.ImprovedNamingStrategy"
   jmx:
     enabled: false

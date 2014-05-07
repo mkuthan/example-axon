@@ -11,4 +11,9 @@ class ConferenceClientUtils {
     static def generateId() {
         UUID.randomUUID().toString();
     }
+
+    static def waitForUser() {
+        print  'Pres any key to continue'
+        System.in.newReader().readLine()
+    }
 }

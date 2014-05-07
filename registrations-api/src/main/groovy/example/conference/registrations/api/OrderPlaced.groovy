@@ -4,6 +4,6 @@ package example.conference.registrations.api
 class OrderPlaced {
     String orderId
     String conferenceId
-    int numberOfSeats
+    List<SeatQuantity> seats
     int timeout
 }

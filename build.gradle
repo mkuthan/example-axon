@@ -16,6 +16,8 @@ configure(allprojects) { project ->
         axonVersion = '2.1.2'
         groovyVersion = '2.2.2'
         springVersion = '4.0.3.RELEASE'
+        springAmqpVersion = '1.2.1.RELEASE'
+        springBootVersion = '1.0.2.RELEASE'
     }
 
     repositories {
@@ -30,8 +32,8 @@ configure(allprojects) { project ->
     }
 
     compileTestJava {
-        sourceCompatibility=1.8
-        targetCompatibility=1.8
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 
 }
@@ -54,7 +56,6 @@ configure(subprojects.findAll { it.name =~ '-impl' }) {
         compile project(':payments-api')
         compile project(':registrations-api')
 
-        compile('org.springframework.boot:spring-boot-starter-amqp')
         compile('org.springframework.boot:spring-boot-starter-web')
     }
 }
@@ -74,6 +75,8 @@ project(':conference-client') {
 project(':conference-configuration') {
     dependencies {
         compile("org.springframework:spring-context:${springVersion}")
+        compile("org.springframework.amqp:spring-rabbit:${springAmqpVersion}")
+        compile("org.springframework.boot:spring-boot:${springBootVersion}")
 
         compile("org.axonframework:axon-core:${axonVersion}")
         compile("org.axonframework:axon-amqp:${axonVersion}")
@@ -83,8 +86,9 @@ project(':conference-configuration') {
 
 project(':management-impl') {
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+        compile("org.springframework.boot:spring-boot-starter-data-jpa")
         compile("org.springframework.boot:spring-boot-starter-data-rest")
+        compile("com.h2database:h2")
     }
 }
 

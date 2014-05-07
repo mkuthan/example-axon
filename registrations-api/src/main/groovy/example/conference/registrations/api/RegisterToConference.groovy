@@ -4,5 +4,5 @@ package example.conference.registrations.api
 class RegisterToConference {
     String orderId
     String conferenceId
-    int numberOfSeats
+    List<SeatQuantity> seats
 }

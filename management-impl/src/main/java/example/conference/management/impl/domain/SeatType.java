@@ -1,25 +1,29 @@
 package example.conference.management.impl.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Document
+@Entity
 public class SeatType {
 
     @Id
     private String id;
 
-    private String conferenceId;
-
+    @Basic(optional = false)
     private String type;
 
+    @Basic(optional = false)
     private int quantity;
 
+    @Basic(optional = false)
     private BigDecimal priceAmount;
 
+    @Basic(optional = false)
     private String priceCurrency;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Conference conference;
 
     public String getId() {
         return id;
@@ -27,14 +31,6 @@ public class SeatType {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getConferenceId() {
-        return conferenceId;
-    }
-
-    public void setConferenceId(String conferenceId) {
-        this.conferenceId = conferenceId;
     }
 
     public String getType() {
@@ -67,6 +63,14 @@ public class SeatType {
 
     public void setPriceCurrency(String priceCurrency) {
         this.priceCurrency = priceCurrency;
+    }
+
+    public Conference getConference() {
+        return conference;
+    }
+
+    public void setConference(Conference conference) {
+        this.conference = conference;
     }
 
     protected SeatType() {

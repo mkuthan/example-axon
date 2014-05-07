@@ -14,14 +14,14 @@
         </property>
     </bean>
 
-    <axon-amqp:terminal id="terminal" exchange-name="${application.configuration.rabbitmq.exchange.name}">
-        <axon-amqp:default-configuration/>
+    <axon-amqp:terminal id="terminal" exchange-name="${application.configuration.rabbit.exchangeName}">
+        <axon-amqp:default-configuration />
     </axon-amqp:terminal>
 
     <axon:cluster id="cluster" default="true">
         <axon:meta-data>
             <entry key="AMQP.Config">
-                <axon-amqp:configuration queue-name="${application.configuration.rabbitmq.queue.name}"/>
+                <axon-amqp:configuration queue-name="${application.configuration.rabbit.queueName}"/>
             </entry>
         </axon:meta-data>
     </axon:cluster>
@@ -43,7 +43,7 @@
     </bean>
 
     <axon:filesystem-event-store id="eventStore"
-                                 base-dir="${application.configuration.axon.eventStore.baseDir}"/>
+                                 base-dir="${application.configuration.axon.eventStoreBaseDir}"/>
 
     <axon:saga-manager
             event-bus="eventBus"

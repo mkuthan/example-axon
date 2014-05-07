@@ -1,22 +1,22 @@
-package example.conference.payments.impl.domain;
+package example.conference.payments.impl.handlers;
 
 import example.conference.payments.api.MakePayment;
+import example.conference.payments.impl.domain.Payment;
 import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PaymentService {
+public class PaymentHandler {
 
     @Autowired
-    private EventSourcingRepository<Payment> paymentRepository;
+    private EventSourcingRepository<Payment> repository;
 
     @CommandHandler
-    public void makePayment(MakePayment command) {
+    public void handle(MakePayment command) {
         Payment payment = new Payment(command.getPaymentId(), command.getOrderId());
-        paymentRepository.add(payment);
+        repository.add(payment);
     }
 
 }

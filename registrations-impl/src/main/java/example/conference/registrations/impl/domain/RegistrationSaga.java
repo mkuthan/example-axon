@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 public class RegistrationSaga extends AbstractAnnotatedSaga {
 
     private static final Logger logger = LoggerFactory.getLogger(RegistrationSaga.class);
@@ -23,10 +25,11 @@ public class RegistrationSaga extends AbstractAnnotatedSaga {
     private transient EventScheduler eventScheduler;
 
     private String conferenceId;
-    private int numberOfSeats;
+    private List<SeatQuantity> seats;
 
     private boolean seatsReservationAccepted = false;
     private boolean paymentReceived = false;
+
 
     @StartSaga
     @SagaEventHandler(associationProperty = "orderId")
@@ -34,9 +37,9 @@ public class RegistrationSaga extends AbstractAnnotatedSaga {
         logger.debug("A new order '{}' is placed.", event.getOrderId());
 
         this.conferenceId = event.getConferenceId();
-        this.numberOfSeats = event.getNumberOfSeats();
+        this.seats = event.getSeats();
 
-        MakeSeatsReservation makeSeatsReservation = new MakeSeatsReservation(conferenceId, event.getOrderId(), numberOfSeats);
+        MakeSeatsReservation makeSeatsReservation = new MakeSeatsReservation(conferenceId, seats, event.getOrderId());
         commandGateway.send(makeSeatsReservation);
 
         RegistrationExpired orderExpired = new RegistrationExpired(event.getOrderId());
@@ -67,9 +70,17 @@ public class RegistrationSaga extends AbstractAnnotatedSaga {
 
     @SagaEventHandler(associationProperty = "orderId")
     public void handle(SeatsReservationRejected event) {
-        logger.debug("Seats reservation is rejected for order {}, rejection reason is: '{}'.",
-                event.getOrderId(),
-                event.getRejectionReason());
+        if (logger.isDebugEnabled()) {
+            StringBuilder sb = new StringBuilder()
+                    .append("Seats reservation is rejected for order: ")
+                    .append(event.getOrderId())
+                    .append(". Rejection reasons:");
+
+            for (String reason : event.getRejectionReasons()) {
+                sb.append("\n\t").append(reason);
+            }
+            logger.debug(sb.toString());
+        }
 
         rejectOrder(event.getOrderId());
     }
@@ -79,12 +90,12 @@ public class RegistrationSaga extends AbstractAnnotatedSaga {
         logger.debug("Order '{}' is expired.", event.getOrderId());
 
         if (seatsReservationAccepted) {
-            CancelSeatsReservation cancelSeatsReservation = new CancelSeatsReservation(conferenceId, event.getOrderId(), numberOfSeats);
+            CancelSeatsReservation cancelSeatsReservation = new CancelSeatsReservation(conferenceId, seats, event.getOrderId());
             commandGateway.send(cancelSeatsReservation);
         }
 
         if (paymentReceived) {
-            // How to compensate payment???
+            // TODO: How to compensate payment?
         }
 
         rejectOrder(event.getOrderId());
@@ -100,7 +111,6 @@ public class RegistrationSaga extends AbstractAnnotatedSaga {
     private void rejectOrder(String orderId) {
         RejectOrder rejectOrder = new RejectOrder(orderId);
         commandGateway.send(rejectOrder);
-
         end();
     }
 

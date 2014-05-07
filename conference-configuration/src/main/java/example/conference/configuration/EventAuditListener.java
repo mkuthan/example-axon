@@ -4,9 +4,7 @@ import org.axonframework.domain.EventMessage;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-@Component
 public class EventAuditListener {
 
     private static final Logger logger = LoggerFactory.getLogger(EventAuditListener.class);

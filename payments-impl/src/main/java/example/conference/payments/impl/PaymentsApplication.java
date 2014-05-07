@@ -5,6 +5,8 @@ import example.conference.payments.impl.domain.Payment;
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventstore.EventStore;
+import org.axonframework.repository.LockManager;
+import org.axonframework.repository.NullLockManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -23,11 +25,15 @@ public class PaymentsApplication {
     }
 
     @Bean
-    public EventSourcingRepository<Payment> paymentRepository(EventBus eventBus, EventStore eventStore) {
-        EventSourcingRepository<Payment> repository = new EventSourcingRepository<>(Payment.class, eventStore);
+    public EventSourcingRepository<Payment> paymentRepository(EventBus eventBus, EventStore eventStore, LockManager lockManager) {
+        EventSourcingRepository<Payment> repository = new EventSourcingRepository<>(Payment.class, eventStore, lockManager);
         repository.setEventBus(eventBus);
         return repository;
+    }
 
+    @Bean
+    public LockManager lockManager() {
+        return new NullLockManager();
     }
 
 }

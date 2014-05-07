@@ -3,5 +3,6 @@ package example.conference.registrations.api
 @ValueObject
 class SeatsReservationRejected {
     String orderId
-    String rejectionReason
+    List<SeatQuantity> seats
+    List<String> rejectionReasons
 }
