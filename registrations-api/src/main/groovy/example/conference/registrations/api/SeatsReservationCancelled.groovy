@@ -1,6 +1,8 @@
 package example.conference.registrations.api
 
-@ValueObject
+import example.conference.shared.Event
+
+@Event
 class SeatsReservationCancelled {
     String orderId
     List<SeatQuantity> seats

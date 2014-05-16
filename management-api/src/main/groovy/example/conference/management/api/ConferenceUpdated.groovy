@@ -1,6 +1,8 @@
 package example.conference.management.api
 
-@ValueObject
+import example.conference.shared.Event
+
+@Event
 class ConferenceUpdated {
     String conferenceId
     String name

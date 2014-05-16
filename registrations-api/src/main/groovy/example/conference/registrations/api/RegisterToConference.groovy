@@ -1,6 +1,8 @@
 package example.conference.registrations.api
 
-@ValueObject
+import example.conference.shared.Command
+
+@Command
 class RegisterToConference {
     String orderId
     String conferenceId

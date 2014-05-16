@@ -48,7 +48,8 @@ def createConference(String conferenceId, String name, String location) {
     def conference = [
             id      : conferenceId,
             name    : name,
-            location: location
+            location: location,
+            published: true
     ]
 
     given()

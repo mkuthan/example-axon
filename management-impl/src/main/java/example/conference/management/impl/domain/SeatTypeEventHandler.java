@@ -18,8 +18,9 @@ public class SeatTypeEventHandler {
     private EventBus eventBus;
 
     @HandleAfterCreate
-    public void publishSeatTypeEvent(SeatType seatType) {
+    public void publishSeatTypeCreatedEvent(SeatType seatType) {
         SeatTypeCreated event = new SeatTypeCreated();
+
         event.setSeatTypeId(seatType.getId());
         event.setType(seatType.getType());
         event.setQuantity(seatType.getQuantity());
@@ -31,8 +32,9 @@ public class SeatTypeEventHandler {
     }
 
     @HandleAfterSave
-    public void publishSeatTypeUpdated(SeatType seatType) {
+    public void publishSeatTypeUpdatedEvent(SeatType seatType) {
         SeatTypeUpdated event = new SeatTypeUpdated();
+
         event.setSeatTypeId(seatType.getId());
         event.setType(seatType.getType());
         event.setQuantity(seatType.getQuantity());

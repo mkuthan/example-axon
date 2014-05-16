@@ -20,6 +20,7 @@ public class ConferenceEventHandler {
     @HandleAfterCreate
     public void publishConferenceCreatedEvent(Conference conference) {
         ConferenceCreated event = new ConferenceCreated();
+
         event.setConferenceId(conference.getId());
         event.setName(conference.getName());
         event.setLocation(conference.getLocation());
@@ -28,8 +29,9 @@ public class ConferenceEventHandler {
     }
 
     @HandleAfterSave
-    public void publishConferenceUpdated(Conference conference) {
+    public void publishConferenceUpdatedEvent(Conference conference) {
         ConferenceUpdated event = new ConferenceUpdated();
+
         event.setConferenceId(conference.getId());
         event.setName(conference.getName());
         event.setLocation(conference.getLocation());

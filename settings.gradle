@@ -1,6 +1,8 @@
 include 'conference-client',
         'conference-configuration',
+        'conference-shared',
         'management-api', 'management-impl',
         'payments-api', 'payments-impl',
         'registrations-api', 'registrations-impl'
+
 

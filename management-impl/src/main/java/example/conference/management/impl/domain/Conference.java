@@ -12,8 +12,11 @@ public class Conference {
     @Basic(optional = false)
     private String name;
 
-    @Column(nullable = false)
+    @Basic(optional = false)
     private String location;
+
+    @Basic(optional = false)
+    private Boolean published;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "conference", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<SeatType> seatTypes;
@@ -40,6 +43,14 @@ public class Conference {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Boolean getPublished() {
+        return published;
+    }
+
+    public void setPublished(Boolean published) {
+        this.published = published;
     }
 
     public Set<SeatType> getSeatTypes() {

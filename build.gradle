@@ -14,7 +14,7 @@ configure(allprojects) { project ->
 
     ext {
         axonVersion = '2.1.2'
-        groovyVersion = '2.2.2'
+        groovyVersion = '2.3.0'
         springVersion = '4.0.3.RELEASE'
         springAmqpVersion = '1.2.1.RELEASE'
         springBootVersion = '1.0.2.RELEASE'
@@ -42,6 +42,8 @@ configure(subprojects.findAll { it.name =~ '-api' }) {
     apply plugin: 'groovy'
 
     dependencies {
+        compile project(':conference-shared')
+
         compile("org.codehaus.groovy:groovy-all:${groovyVersion}")
     }
 }
@@ -50,6 +52,7 @@ configure(subprojects.findAll { it.name =~ '-impl' }) {
     apply plugin: 'spring-boot'
 
     dependencies {
+        compile project(':conference-shared')
         compile project(':conference-configuration')
 
         compile project(':management-api')
@@ -83,6 +86,13 @@ project(':conference-configuration') {
     }
 }
 
+project(':conference-shared') {
+    apply plugin: 'groovy'
+
+    dependencies {
+        compile("org.codehaus.groovy:groovy-all:${groovyVersion}")
+    }
+}
 
 project(':management-impl') {
     dependencies {

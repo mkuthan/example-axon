@@ -1,13 +1,15 @@
-package example.conference.management.api
+package example.conference.shared
 
 import groovy.transform.AnnotationCollector
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import groovy.transform.TupleConstructor
+import groovy.transform.builder.Builder
 
+//@Builder http://jira.codehaus.org/browse/GROOVY-6774
 @TupleConstructor
 @EqualsAndHashCode
 @ToString(includePackage = false, includeNames = true)
 @AnnotationCollector()
-@interface ValueObject {
+@interface Event {
 }
