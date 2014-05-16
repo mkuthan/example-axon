@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:axon="http://www.axonframework.org/schema/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.axonframework.org/schema/core http://www.axonframework.org/schema/axon-core.xsd">
+
+    <axon:annotation-config/>
+
+    <axon:filesystem-event-store id="eventStore"
+                                 base-dir="${application.payments.eventStoreBaseDir}"/>
+
+    <axon:event-sourcing-repository id="paymentRepository"
+                                    aggregate-type="example.conference.payments.impl.domain.Payment"/>
+</beans>

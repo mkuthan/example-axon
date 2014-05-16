@@ -41,14 +41,4 @@
     <bean class="org.axonframework.eventhandling.scheduling.java.SimpleEventSchedulerFactoryBean">
         <property name="eventBus" ref="eventBus"/>
     </bean>
-
-    <axon:filesystem-event-store id="eventStore"
-                                 base-dir="${application.configuration.axon.eventStoreBaseDir}"/>
-
-    <axon:saga-manager
-            event-bus="eventBus"
-            base-package="example.conference">
-        <axon:async/>
-    </axon:saga-manager>
-
 </beans>

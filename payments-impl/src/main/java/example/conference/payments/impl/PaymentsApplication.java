@@ -9,31 +9,17 @@ import org.axonframework.repository.LockManager;
 import org.axonframework.repository.NullLockManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 
 @Configuration
 @EnableAutoConfiguration
 @Import({ConferenceConfiguration.class})
+@ImportResource("classpath:/payments.xml")
 @ComponentScan
 public class PaymentsApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PaymentsApplication.class, args);
-    }
-
-    @Bean
-    public EventSourcingRepository<Payment> paymentRepository(EventBus eventBus, EventStore eventStore, LockManager lockManager) {
-        EventSourcingRepository<Payment> repository = new EventSourcingRepository<>(Payment.class, eventStore, lockManager);
-        repository.setEventBus(eventBus);
-        return repository;
-    }
-
-    @Bean
-    public LockManager lockManager() {
-        return new NullLockManager();
     }
 
 }

@@ -1,12 +1,9 @@
 application:
   configuration:
-    axon:
-      eventStoreBaseDir: "${java.io.tmpdir}/example-axon/registrations"
     rabbit:
       queueName: "RegistrationsQueue"
   registrations:
-    key: "value"
-
+    eventStoreBaseDir: "${java.io.tmpdir}/example-axon/registrations"
 
 server:
   port: 28080

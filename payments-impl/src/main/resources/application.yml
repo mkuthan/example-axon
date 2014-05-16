@@ -1,11 +1,9 @@
 application:
   configuration:
-    axon:
-      eventStoreBaseDir: "${java.io.tmpdir}/example-axon/payments"
     rabbit:
       queueName: "PaymentsQueue"
   payments:
-    key: "value"
+    eventStoreBaseDir: "${java.io.tmpdir}/example-axon/payments"
 
 server:
   port: 38080

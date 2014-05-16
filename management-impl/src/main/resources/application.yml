@@ -1,7 +1,5 @@
 application:
   configuration:
-    axon:
-      eventStoreBaseDir: "${java.io.tmpdir}/example-axon/management"
     rabbit:
       queueName: "ManagementQueue"
   management:
