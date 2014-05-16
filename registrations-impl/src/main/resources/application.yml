@@ -3,11 +3,6 @@ application:
     axon:
       eventStoreBaseDir: "${java.io.tmpdir}/example-axon/registrations"
     rabbit:
-      host: "localhost"
-      port: 5672
-      username: guest
-      password: guest
-      exchangeName: "Axon.EventBus"
       queueName: "RegistrationsQueue"
   registrations:
     key: "value"
