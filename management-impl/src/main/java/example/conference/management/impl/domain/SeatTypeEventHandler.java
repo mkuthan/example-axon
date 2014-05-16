@@ -2,6 +2,7 @@ package example.conference.management.impl.domain;
 
 import example.conference.management.api.SeatTypeCreated;
 import example.conference.management.api.SeatTypeUpdated;
+import example.conference.shared.Money;
 import org.axonframework.domain.GenericEventMessage;
 import org.axonframework.eventhandling.EventBus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,7 @@ public class SeatTypeEventHandler {
         event.setSeatTypeId(seatType.getId());
         event.setType(seatType.getType());
         event.setQuantity(seatType.getQuantity());
-        event.setPriceAmount(seatType.getPriceAmount());
-        event.setPriceCurrency(seatType.getPriceCurrency());
+        event.setPrice(new Money(seatType.getPriceAmount(), seatType.getPriceCurrency()));
         event.setConferenceId(seatType.getConference().getId());
 
         publishEvent(event);
@@ -38,8 +38,7 @@ public class SeatTypeEventHandler {
         event.setSeatTypeId(seatType.getId());
         event.setType(seatType.getType());
         event.setQuantity(seatType.getQuantity());
-        event.setPriceAmount(seatType.getPriceAmount());
-        event.setPriceCurrency(seatType.getPriceCurrency());
+        event.setPrice(new Money(seatType.getPriceAmount(), seatType.getPriceCurrency()));
         event.setConferenceId(seatType.getConference().getId());
 
         publishEvent(event);

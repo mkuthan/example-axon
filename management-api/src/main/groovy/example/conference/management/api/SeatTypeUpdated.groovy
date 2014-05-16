@@ -1,13 +1,13 @@
 package example.conference.management.api
 
 import example.conference.shared.Event
+import example.conference.shared.Money
 
 @Event
 class SeatTypeUpdated {
     String seatTypeId
     String type
     int quantity
-    BigDecimal priceAmount
-    String priceCurrency
+    Money price
     String conferenceId;
 }

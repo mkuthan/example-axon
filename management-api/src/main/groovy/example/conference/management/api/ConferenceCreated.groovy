@@ -7,4 +7,5 @@ class ConferenceCreated {
     String conferenceId
     String name
     String location
+    boolean published
 }

@@ -24,6 +24,7 @@ public class ConferenceEventHandler {
         event.setConferenceId(conference.getId());
         event.setName(conference.getName());
         event.setLocation(conference.getLocation());
+        event.setPublished(conference.getPublished());
 
         publishEvent(event);
     }
@@ -35,6 +36,7 @@ public class ConferenceEventHandler {
         event.setConferenceId(conference.getId());
         event.setName(conference.getName());
         event.setLocation(conference.getLocation());
+        event.setPublished(conference.getPublished());
 
         publishEvent(event);
     }
