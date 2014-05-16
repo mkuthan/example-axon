@@ -11,23 +11,26 @@ import static example.conference.client.ConferenceClientUtils.*
 
 RestAssured.requestContentType(ContentType.JSON)
 
-def qconId = generateId();
+def qconId = generateId()
 def qconHref = createConference(qconId, 'QCon 2014', 'New York')
 
 waitForUser()
 
-def qconConferenceId = generateId();
+def qconConferenceId = generateId()
 createSeatType(qconConferenceId, 'Conference', 800, 1600, 'USD', qconHref)
 
 waitForUser()
 
-def qconTutorialsId = generateId();
+def qconTutorialsId = generateId()
 createSeatType(qconTutorialsId, 'Tutorials', 200, 300, 'USD', qconHref)
 
 waitForUser()
 
-// Register to Conference
-def qconOrderId = generateId();
+publishConference(qconId)
+
+waitForUser()
+
+def qconOrderId = generateId()
 registerToConference(qconOrderId, qconId,
         [
                 [seatTypeId: qconConferenceId, quantity: 3],
@@ -49,7 +52,7 @@ def createConference(String conferenceId, String name, String location) {
             id      : conferenceId,
             name    : name,
             location: location,
-            published: true
+            published: false
     ]
 
     given()
@@ -79,6 +82,22 @@ def createSeatType(String seatTypeId, String type, int quantity, int priceAmount
             .post("/seatTypes")
             .then()
             .assertThat().statusCode(HttpStatus.SC_CREATED)
+            .extract().header(HttpHeaders.LOCATION)
+}
+
+def publishConference(String conferenceId) {
+    println "Publish Conference: $conferenceId"
+
+    def conference = [
+            published: true
+    ]
+
+    given()
+            .port(MANAGEMENT_PORT)
+            .body(toJson(conference))
+            .patch("/conferences/$conferenceId")
+            .then()
+            .assertThat().statusCode(HttpStatus.SC_NO_CONTENT)
             .extract().header(HttpHeaders.LOCATION)
 }
 
