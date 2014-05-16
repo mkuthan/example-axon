@@ -113,7 +113,7 @@ def registerToConference(String orderId, String conferenceId, def seats) {
     given()
             .port(REGISTRATIONS_PORT)
             .body(toJson(registerToConference))
-            .post("/registrations/registerToConference")
+            .post("/registerToConference")
             .then()
             .assertThat().statusCode(HttpStatus.SC_CREATED)
 }
@@ -129,7 +129,7 @@ def makePayment(String paymentId, String orderId) {
     given()
             .port(PAYMENTS_PORT)
             .body(toJson(makePayment))
-            .post("/payments/makePayment")
+            .post("/makePayment")
             .then()
             .assertThat().statusCode(HttpStatus.SC_CREATED)
 }
