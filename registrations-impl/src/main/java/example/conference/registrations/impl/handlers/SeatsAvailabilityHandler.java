@@ -11,35 +11,35 @@ import org.springframework.stereotype.Component;
 public class SeatsAvailabilityHandler {
 
     @Autowired
-    private Repository<SeatsAvailability> repository;
+    private Repository<SeatsAvailability> seatsAvailabilityRepository;
 
     @CommandHandler
     public void handle(CreateSeatsAvailability command) {
         SeatsAvailability seatsAvailability = new SeatsAvailability(command.getConferenceId());
-        repository.add(seatsAvailability);
+        seatsAvailabilityRepository.add(seatsAvailability);
     }
 
     @CommandHandler
     public void handle(AddSeats command) {
-        SeatsAvailability seatsAvailability = repository.load(command.getConferenceId());
+        SeatsAvailability seatsAvailability = seatsAvailabilityRepository.load(command.getConferenceId());
         seatsAvailability.addSeats(command.getSeatTypeId(), command.getQuantity());
     }
 
     @CommandHandler
     public void handle(RemoveSeats command) {
-        SeatsAvailability seatsAvailability = repository.load(command.getConferenceId());
+        SeatsAvailability seatsAvailability = seatsAvailabilityRepository.load(command.getConferenceId());
         seatsAvailability.removeSeats(command.getSeatTypeId(), command.getQuantity());
     }
 
     @CommandHandler
     public void handle(MakeSeatsReservation command) {
-        SeatsAvailability seatsAvailability = repository.load(command.getConferenceId());
+        SeatsAvailability seatsAvailability = seatsAvailabilityRepository.load(command.getConferenceId());
         seatsAvailability.makeSeatsReservation(command.getSeats(), command.getOrderId());
     }
 
     @CommandHandler
     public void handle(CancelSeatsReservation command) {
-        SeatsAvailability seatsAvailability = repository.load(command.getConferenceId());
+        SeatsAvailability seatsAvailability = seatsAvailabilityRepository.load(command.getConferenceId());
         seatsAvailability.cancelSeatsReservation(command.getSeats(), command.getOrderId());
     }
 
